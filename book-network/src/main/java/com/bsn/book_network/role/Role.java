@@ -19,9 +19,11 @@ import java.util.List;
 @Entity
 @EntityListeners(AuditingEntityListener.class)
 public class Role {
+
     @Id
     @GeneratedValue
     private Integer id;
+
     @Column(unique = true)
     private String name;
 
