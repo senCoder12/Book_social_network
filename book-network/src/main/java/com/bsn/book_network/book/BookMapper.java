@@ -1,5 +1,6 @@
 package com.bsn.book_network.book;
 
+import com.bsn.book_network.file.FileUtils;
 import com.bsn.book_network.history.BookTransactionHistory;
 import jakarta.validation.Valid;
 import org.springframework.stereotype.Service;
@@ -28,6 +29,7 @@ public class BookMapper {
                 .shareable(book.isShareable())
                 .owner(book.getOwner().getFullName())
                 .rate(book.getRate())
+                .cover(FileUtils.readFileFromLocation(book.getBookCover()))
                 .build();
     }
 

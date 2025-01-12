@@ -36,6 +36,10 @@ spring:
       jwt:
         secret-key: 5DFGDFF342HDFH34TFDSGLOJBAOU98Q3BOJBQE98Y23KJBKI97T32
         expiration: 8640000
+
+    file:
+      upload:
+        photos-output-url: ./uploads
     mailing:
       frontend:
         activation-url: http://localhost:4200/activate-account

@@ -2,9 +2,11 @@ package com.bsn.book_network.book;
 
 import com.bsn.book_network.common.PageResponse;
 import com.bsn.book_network.exception.OperationNotPermittedException;
+import com.bsn.book_network.file.FileStorageService;
 import com.bsn.book_network.history.BookTransactionHistory;
 import com.bsn.book_network.history.BookTransactionHistoryRepository;
 import com.bsn.book_network.user.User;
+import jakarta.mail.Multipart;
 import jakarta.persistence.EntityNotFoundException;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
@@ -14,6 +16,7 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
 import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Service;
+import org.springframework.web.multipart.MultipartFile;
 
 import java.util.List;
 import java.util.Objects;
@@ -28,6 +31,8 @@ public class BookService {
     private final BookRepository bookRepository;
 
     private final BookTransactionHistoryRepository bookTransactionHistoryRepository;
+
+    private final FileStorageService fileStorageService;
 
     public Integer save(@Valid BookRequest request, Authentication connectedUser) {
         User user = ((User) connectedUser.getPrincipal());
@@ -201,5 +206,14 @@ public class BookService {
         transactionHistory.setReturnApproved(true);
 
         return bookTransactionHistoryRepository.save(transactionHistory).getId();
+    }
+
+    public void uploadBookCover(Integer bookId, MultipartFile file, Authentication connectedUser) {
+        Book book = bookRepository.findById(bookId)
+                .orElseThrow(() -> new EntityNotFoundException("No book found with the id:: " + bookId));
+        User user = ((User) connectedUser.getPrincipal());
+        var bookCover = fileStorageService.saveFile(file, user.getId());
+        book.setBookCover(bookCover);
+        bookRepository.save(book);
     }
 }
