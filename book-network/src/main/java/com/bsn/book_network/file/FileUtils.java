@@ -20,5 +20,6 @@ public class FileUtils {
         } catch (IOException e) {
             log.warn("No file found in this path {}", fileUrl);
         }
+        return new byte[0];
     }
 }

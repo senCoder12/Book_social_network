@@ -6,7 +6,6 @@ import com.bsn.book_network.file.FileStorageService;
 import com.bsn.book_network.history.BookTransactionHistory;
 import com.bsn.book_network.history.BookTransactionHistoryRepository;
 import com.bsn.book_network.user.User;
-import jakarta.mail.Multipart;
 import jakarta.persistence.EntityNotFoundException;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
