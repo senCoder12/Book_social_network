@@ -20,8 +20,8 @@ public interface BookRepository extends JpaRepository<Book, Integer>, JpaSpecifi
 
     @Query("""
             SELECT book
-            FROM BOOK book
-            WHERE book.owner.id == :userId
+            FROM Book book
+            WHERE book.owner.id = :userId
             """)
     Page<Book> findAllBooksByOwner(Pageable pageable, Integer userId);
 }
