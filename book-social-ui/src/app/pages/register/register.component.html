@@ -1,0 +1,53 @@
+<div class="container-fluid d-flex justify-content-center align-items-center min-vh-100 animated-background">
+    <!-- Floating Decorative Shapes -->
+    <div class="floating-shape shape-1"></div>
+    <div class="floating-shape shape-2"></div>
+    <div class="floating-shape shape-3"></div>
+
+    <!-- Login Card -->
+    <div class="card p-4 shadow-lg border-0 rounded login-card">
+        <h3 class="text-center mb-4 text-primary">Create an account</h3>
+        <hr>
+
+        <div class="alert alert-danger" role="alert" *ngIf="errorMsg.length">
+            <ul class="mb-0">
+                <li *ngFor="let msg of errorMsg">{{ msg }}</li>
+            </ul>
+        </div>
+
+        <div class="form-group mb-3">
+            <label for="email" class="form-label">Email Address</label>
+            <input [(ngModel)]="registerRequest.email" type="email" class="form-control rounded-pill shadow-sm" id="email" placeholder="name@example.com">
+        </div>
+
+        <div class="form-group mb-3">
+            <label for="firstName" class="form-label">First Name</label>
+            <input [(ngModel)]="registerRequest.firstName" type="text" class="form-control rounded-pill shadow-sm" id="firstName" placeholder="Enter your first name">
+        </div>
+
+        <div class="form-group mb-3">
+            <label for="lastName" class="form-label">Last Name</label>
+            <input [(ngModel)]="registerRequest.lastName" type="text" class="form-control rounded-pill shadow-sm" id="lastName" placeholder="Enter your last name">
+        </div>
+
+        <div class="form-group mb-3">
+            <label for="password" class="form-label">Password</label>
+            <input [(ngModel)]="registerRequest.password" type="password" class="form-control rounded-pill shadow-sm" id="password" placeholder="Enter your password">
+        </div>
+
+        <div class="d-flex justify-content-between align-items-center mb-3">
+            <button type="button" class="btn btn-gradient-primary w-100 rounded-pill shadow" (click)="register()">
+                <em class="fas fa-sign-in-alt"></em>
+                <span>&nbsp;Sign Up</span>
+            </button>
+        </div>
+
+        <div class="text-center mt-3">
+            <p class="mb-2">Already have an account?</p>
+            <button type="button" class="btn btn-link text-decoration-none text-primary" (click)="login()">
+                <em class="fas fa-user-plus"></em>
+                <span>&nbsp;Login</span>
+            </button>
+        </div>
+    </div>
+</div>
