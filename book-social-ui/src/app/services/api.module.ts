@@ -12,12 +12,14 @@ import { FeedbackService } from './services/feedback.service';
 import { CommonModule } from '@angular/common';
 import { BrowserModule } from '@angular/platform-browser';
 import { AppComponent } from '../app.component';
+import { CodeInputModule } from "angular-code-input";
 
 /**
  * Module that provides all services and configuration.
  */
 @NgModule({
   imports: [
+    CodeInputModule
   ],
   exports: [],
   declarations: [],
