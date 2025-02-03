@@ -17,6 +17,7 @@ export class LoginComponent {
 
   authRequest: AuthenticationRequest = { email: "", password: "" };
   errorMsg: Array<string> = [];
+  loading: boolean = false;
 
   constructor(
     private authService: AuthenticationService, 
@@ -27,6 +28,7 @@ export class LoginComponent {
 
   login() {
     this.errorMsg = [];
+    this.loading = true;
     this.authService.authenticate({
       body: this.authRequest
     }).subscribe({
@@ -35,13 +37,13 @@ export class LoginComponent {
         this.router.navigate(['books']);
       },
       error: (err) => {
-        console.log(err)
         if (err.error.validationErrors) {
           this.errorMsg = err.error.validationErrors;
         } else {
           this.errorMsg.push(err.error.error);
         }
-      }
+        this.loading = false; 
+      },
     })
   }
 

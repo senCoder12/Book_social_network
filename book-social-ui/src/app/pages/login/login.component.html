@@ -26,7 +26,7 @@
         </div>
 
         <div class="d-flex justify-content-between align-items-center mb-3">
-            <button type="button" class="btn btn-gradient-primary w-100 rounded-pill shadow" (click)="login()">
+            <button type="button" class="btn btn-gradient-primary w-100 rounded-pill shadow" (click)="login()" [class.disabled]="loading">
                 <em class="fas fa-sign-in-alt"></em>
                 <span>&nbsp;Sign In</span>
             </button>
