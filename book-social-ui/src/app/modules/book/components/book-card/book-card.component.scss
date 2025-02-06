@@ -3,9 +3,14 @@
 div {
     &.card {
         min-height: 450px;
-        min-width: 450px;
+        min-width: 400px;
     }
 }
 i {
     cursor: pointer;
+}
+
+.card-img-top {
+    height: 400px;
+    object-fit: cover;
 }

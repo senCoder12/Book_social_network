@@ -4,7 +4,7 @@ import { BooksService } from '../../../../services/services';
 import { BookCardComponent } from '../../components/book-card/book-card.component';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
-import { RouterLink } from '@angular/router';
+import { Router, RouterLink } from '@angular/router';
 
 @Component({
   selector: 'app-my-books',
@@ -20,7 +20,8 @@ export class MyBooksComponent {
     size: number = 5;
   
     constructor(
-      private bookService: BooksService
+      private bookService: BooksService,
+      private router: Router
     ) {}
   
     ngOnInit(): void {
@@ -73,14 +74,26 @@ export class MyBooksComponent {
     }
 
     archiveBook(book: BookResponse) {
-
+      this.bookService.updateArchivedStatus({
+        "book-id": book.id as number
+      }).subscribe({
+        next: () => {
+          book.archived = !book.archived;
+        }
+      });
     }
 
     editBook(book: BookResponse) {
-
+      this.router.navigate(['books', 'manage', book.id]);
     }
 
     shareBook(book: BookResponse) {
-
+      this.bookService.updateShareableStatus({
+        "book-id": book.id as number
+      }).subscribe({
+        next: () => {
+          book.shareable = !book.shareable;
+        }
+      })
     }
 }
