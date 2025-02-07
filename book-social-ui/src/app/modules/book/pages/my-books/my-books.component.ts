@@ -5,11 +5,12 @@ import { BookCardComponent } from '../../components/book-card/book-card.componen
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { Router, RouterLink } from '@angular/router';
+import { PaginationComponent } from '../../components/pagination/pagination.component';
 
 @Component({
   selector: 'app-my-books',
   standalone: true,
-  imports: [ BookCardComponent, CommonModule, FormsModule, RouterLink],
+  imports: [ BookCardComponent, CommonModule, FormsModule, RouterLink, PaginationComponent],
   templateUrl: './my-books.component.html',
   styleUrl: './my-books.component.scss'
 })
@@ -95,5 +96,10 @@ export class MyBooksComponent {
           book.shareable = !book.shareable;
         }
       })
+    }
+
+    onPageChange(page: number) {
+      this.page = page;
+      this.findAllBooks();
     }
 }

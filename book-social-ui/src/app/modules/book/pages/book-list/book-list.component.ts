@@ -3,11 +3,12 @@ import { BooksService } from '../../../../services/services';
 import { BookResponse, PageResponseBookResponse } from '../../../../services/models';
 import { CommonModule } from '@angular/common';
 import { BookCardComponent } from "../../components/book-card/book-card.component";
+import { PaginationComponent } from '../../components/pagination/pagination.component';
 
 @Component({
   selector: 'app-book-list',
   standalone: true,
-  imports: [CommonModule, BookCardComponent],
+  imports: [CommonModule, BookCardComponent, PaginationComponent],
   templateUrl: './book-list.component.html',
   styleUrl: './book-list.component.scss'
 })
@@ -37,41 +38,6 @@ export class BookListComponent implements OnInit {
     });
   }
 
-  gotoFirstPage() {
-    this.page = 0;
-    this.findAllBooks();
-  }
-
-  gotoPreviousPage() {
-    if (this.bookResponse && this.bookResponse.totalPages !== undefined) {
-      this.page = this.bookResponse.totalPages - 1;
-    }
-    this.findAllBooks();
-  }
-
-  gotoPage(page: number) {
-    this.page = page;
-    this.findAllBooks();
-  }
-
-  gotoNextPage() {
-    if (this.bookResponse && this.bookResponse.totalPages !== undefined) {
-      this.page = this.bookResponse.totalPages + 1;
-    }
-    this.findAllBooks();
-  }
-
-  gotoLastPage() {
-    if (this.bookResponse && this.bookResponse.totalPages !== undefined) {
-      this.page = this.bookResponse.totalPages;
-    }
-    this.findAllBooks();
-  }
-
-  get isLastPage(): boolean {
-    return this.bookResponse && this.bookResponse.totalPages !== undefined && this.page === this.bookResponse.totalPages;
-  }
-
   onBorrow(book: BookResponse) {
     this.message = "";
     this.level = "success";
@@ -92,5 +58,10 @@ export class BookListComponent implements OnInit {
         }, 5000);
       }
     });
+  }
+
+  onPageChange(page: number) {
+    this.page = page;
+    this.findAllBooks();
   }
 }

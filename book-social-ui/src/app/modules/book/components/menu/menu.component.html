@@ -8,7 +8,7 @@
             <span class="navbar-toggler-icon"></span>
         </button>
         <div class="collapse navbar-collapse" id="navbarSupportedContent">
-            <ul class="nav navbar-nav me-auto mb-2 mb-lg-0">
+            <!-- <ul class="nav navbar-nav me-auto mb-2 mb-lg-0">
                 <li class="nav-item">
                     <a class="nav-link" aria-current="page" routerLink="/books">
                         <i class="fa fa-home-alt"></i>&nbsp;Home
@@ -34,7 +34,29 @@
                         <i class="fa-solid fa-share-from-square"></i>&nbsp;Borrowed books
                     </a>
                 </li>
-            </ul> 
+            </ul>  -->
+            <ul class="nav nav-tabs me-auto mb-2 mb-lg-0">
+                <li class="nav-item">
+                    <a class="nav-link active" aria-current="page" routerLink="/books">
+                        <i class="fa fa-home-alt"></i>&nbsp;Home
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" routerLink="my-books">
+                        <i class="fa fa-book"></i>&nbsp;My Books
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" routerLink="my-returned-books">
+                        <i class="fa-solid fa-right-left"></i>&nbsp;My returned books
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" routerLink="borrowed-books">
+                        <i class="fa-solid fa-share-from-square"></i>&nbsp;Borrowed books
+                    </a>
+                </li>
+            </ul>
             <form class="d-flex gap-2 align-items-center" role="search">
                 <input type="text" class="form-control" placeholder="Find a book" aria-label="Search">
                 <button class="btn btn-outline-success" type="submit">

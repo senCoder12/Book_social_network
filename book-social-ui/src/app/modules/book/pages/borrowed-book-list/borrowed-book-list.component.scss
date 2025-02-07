@@ -1,0 +1,23 @@
+.custom-table {
+    border-radius: 10px;
+    overflow: hidden;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    background-color: #ffffff; /* Light background */
+  }
+  .custom-table th {
+    background-color: #5D9BFF; /* Soft Blue */
+    color: white;
+  }
+  .custom-table tbody tr:hover {
+    background-color: #E1F1FF; /* Light Blue-Gray */
+  }
+  .custom-table thead {
+    font-size: 1.1rem;
+    text-align: center;
+  }
+  .custom-table tbody td {
+    text-align: center;
+  }
+  .custom-table th, .custom-table td {
+    padding: 12px 15px;
+  }
