@@ -19,6 +19,7 @@ export class MenuComponent implements OnInit {
     const linkColor = document.querySelectorAll(".nav-link");
     linkColor.forEach(link => {
       if(window.location.href.endsWith(link.getAttribute("routerLink") || '')) {
+        linkColor.forEach(l => l.classList.remove("active"));
         link.classList.add("active");
       }
       link.addEventListener("click", () => {
