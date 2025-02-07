@@ -10,10 +10,22 @@
         alt="..."
     />
     <div class="card-body overflow-scroll">
-        <h5 class="card-title fs-6 text-nowrap fw-bold mb-1"><i class="fa-solid fa-book"></i> &nbsp;{{ book.title }}</h5>
-        <h5 class="card-title fs-6 text-secondary fw-bold mb-1"><i class="fa-solid fa-user-check"></i> &nbsp;{{ book.authorName }}</h5>
-        <h6 class="card-title fs-6 text-secondary fw-bold mb-1"><i class="fas fa-code"></i> &nbsp;{{ book.isbn }}</h6>
-        <h6 class="card-title fs-6 text-secondary fw-bold mb-1"><i class="fas fa-user"></i> &nbsp;{{ book.owner }}</h6>
+        <h5 class="card-title fs-6 text-nowrap fw-bold mb-1">
+            <i class="fa-solid fa-book"></i>
+            <span class="margin-left-8">{{ (book.title && book.title.length > 30) ? (book.title | slice:0:30) + '...' : book.title }}</span>
+        </h5>
+        <h5 class="card-title fs-6 text-secondary fw-bold mb-1">
+            <i class="fa-solid fa-user-check"></i>
+            <span class="margin-left-4">{{ (book.authorName && book.authorName.length > 30) ? (book.authorName | slice:0:30) + '...' : book.authorName }}</span>
+        </h5>
+        <h6 class="card-title fs-6 text-secondary fw-bold mb-1">
+            <i class="fas fa-code"></i>
+            <span class="margin-left-8">{{book.isbn }}</span>
+        </h6>
+        <h6 class="card-title fs-6 text-secondary fw-bold mb-1">
+            <i class="fas fa-user"></i>
+            <span class="margin-left-8">{{ (book.owner && book.owner.length > 30) ? (book.owner | slice:0:30) + '...' : book.owner }}</span>
+        </h6>
         <hr />
         <p class="card-text">{{ book.synopsis}}</p>
     </div>
@@ -25,7 +37,7 @@
             </span>
         </div>
         <div class="d-flex gap-2" *ngIf="!manage">
-            <i (click)="onShowDetails()" class="fa fa-info-circle text-primary"></i>
+            <i (click)="onShowDetails()" class="fa fa-info-circle text-primary" data-bs-toggle="tooltip" data-bs-placement="top" data-bs-title="Show details"></i>
             <i (click)="onBorrow()" class="fas fa-list-check text-primary"></i>
             <i (click)="onAddToWaitingList()" class="fas fa-heart text-danger"></i>
         </div>
