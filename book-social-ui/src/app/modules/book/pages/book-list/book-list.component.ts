@@ -4,11 +4,12 @@ import { BookResponse, PageResponseBookResponse } from '../../../../services/mod
 import { CommonModule } from '@angular/common';
 import { BookCardComponent } from "../../components/book-card/book-card.component";
 import { PaginationComponent } from '../../components/pagination/pagination.component';
+import { LoaderComponent } from '../../components/loader/loader.component';
 
 @Component({
   selector: 'app-book-list',
   standalone: true,
-  imports: [CommonModule, BookCardComponent, PaginationComponent],
+  imports: [CommonModule, BookCardComponent, PaginationComponent, LoaderComponent],
   templateUrl: './book-list.component.html',
   styleUrl: './book-list.component.scss'
 })
@@ -19,6 +20,7 @@ export class BookListComponent implements OnInit {
   size: number = 5;
   message: string = '';
   level: string = 'success';
+  isLoading: boolean = false;
 
   constructor(
     private bookService: BooksService
@@ -28,11 +30,13 @@ export class BookListComponent implements OnInit {
     this.findAllBooks();
   }
   findAllBooks() {
+    this.isLoading = true;
     this.bookService.findAllBooks({
       page: this.page,
       size: this.size
     }).subscribe({
       next: (books)=> {
+        this.isLoading = false;
         this.bookResponse = books;
       }
     });

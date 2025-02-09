@@ -1,27 +1,19 @@
 <p>book-list</p>
 
-<div
-    *ngIf="message"
-    class="alert"
-    [ngClass]="{ 'alert-success': level === 'success', 'alert-danger': level === 'error' }"
->
+<app-loader *ngIf="isLoading"></app-loader>
+
+<div *ngIf="message" class="alert"
+    [ngClass]="{ 'alert-success': level === 'success', 'alert-danger': level === 'error' }">
     {{ message }}
 </div>
 
 <hr />
 
 <div class="d-flex justify-content-start gap-2 flex-wrap" *ngIf="bookResponse?.content?.length">
-    <app-book-card 
-        *ngFor="let book of bookResponse.content" 
-        [book]="book"
-        (borrow)="onBorrow($event)">
+    <app-book-card *ngFor="let book of bookResponse.content" [book]="book" (borrow)="onBorrow($event)">
     </app-book-card>
 </div>
 
-<app-pagination
-    [totalItems]="bookResponse.totalElements || 0"
-    [currentPage]="page"
-    [itemsPerPage]="size"
-    [totalPages]="bookResponse.totalPages || 0"
-    (pageChange)="onPageChange($event)">
+<app-pagination [totalItems]="bookResponse.totalElements || 0" [currentPage]="page" [itemsPerPage]="size"
+    [totalPages]="bookResponse.totalPages || 0" (pageChange)="onPageChange($event)">
 </app-pagination>

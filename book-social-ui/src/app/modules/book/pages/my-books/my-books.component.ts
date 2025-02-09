@@ -6,11 +6,12 @@ import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { Router, RouterLink } from '@angular/router';
 import { PaginationComponent } from '../../components/pagination/pagination.component';
+import { LoaderComponent } from '../../components/loader/loader.component';
 
 @Component({
   selector: 'app-my-books',
   standalone: true,
-  imports: [ BookCardComponent, CommonModule, FormsModule, RouterLink, PaginationComponent],
+  imports: [ BookCardComponent, CommonModule, FormsModule, RouterLink, PaginationComponent, LoaderComponent],
   templateUrl: './my-books.component.html',
   styleUrl: './my-books.component.scss'
 })
@@ -19,6 +20,7 @@ export class MyBooksComponent {
     bookResponse: PageResponseBookResponse = {};
     page: number = 0;
     size: number = 5;
+    isLoading: boolean = false;
   
     constructor(
       private bookService: BooksService,
@@ -29,12 +31,14 @@ export class MyBooksComponent {
       this.findAllBooks();
     }
     findAllBooks() {
+      this.isLoading = true;
       this.bookService.findAllBooksByOwner({
         page: this.page,
         size: this.size
       }).subscribe({
         next: (books)=> {
           this.bookResponse = books;
+          this.isLoading = false;
         }
       });
     }

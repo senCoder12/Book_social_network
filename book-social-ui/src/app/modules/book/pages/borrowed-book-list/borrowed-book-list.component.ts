@@ -17,6 +17,7 @@ export class BorrowedBookListComponent implements OnInit{
   selectedBook: BorrowedBookResponse = {};
   page: number = 0;
   size: number = 5;
+  isLoading: boolean = false;
 
   constructor(
     private bookService: BooksService
@@ -31,11 +32,13 @@ export class BorrowedBookListComponent implements OnInit{
   }
 
   private finalBorrowedBooks(): void {
+    this.isLoading = true;
     this.bookService.findAllBorrowedBook({
       page: this.page,
       size: this.size
     }).subscribe({
       next: (response) => {
+        this.isLoading = false;
         this.borrowedBooks = response;
       },
       error: (error) => {

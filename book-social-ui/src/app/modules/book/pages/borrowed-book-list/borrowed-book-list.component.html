@@ -1,4 +1,9 @@
 <div class="container mt-5">
+  <!-- Loader Overlay -->
+  <div *ngIf="isLoading" class="loader-overlay">
+    <div class="loader"></div>
+  </div>
+
   <h5 class="text-center text-primary mb-4">My Borrowed Book</h5>
   <hr />
   <table class="table table-striped table-bordered custom-table">
@@ -13,16 +18,14 @@
       </tr>
     </thead>
     <tbody>
-      <tr
-        *ngFor="let book of borrowedBooks.content; let i = index"
-      >
+      <tr *ngFor="let book of borrowedBooks.content; let i = index">
         <td>{{i + 1}}</td>
         <td>{{book.title}}</td>
         <td>{{book.authorName}}</td>
         <td>{{book.isbn}}</td>
         <td><i class="fas fa-star text-warning"></i> {{book.rate}}</td>
         <td>
-          <div class="d-flex gap-2">
+          <div class="d-flex gap-2 justify-content-center">
             <i class="fa-regular fa-paper-plane text-primary" *ngIf="book.returned"></i>
             <i class="fa-solid fa-paper-plane text-success" (click)="returnBorrowedBook(book)" *ngIf="!book.returned"></i>
             <i class="fa-solid fa-circle-check" [class.text-success]="book.returnApproved"></i>
@@ -39,5 +42,4 @@
     [totalPages]="borrowedBooks.totalPages || 0"
     (pageChange)="onPageChange($event)">
   </app-pagination>
-
 </div>
