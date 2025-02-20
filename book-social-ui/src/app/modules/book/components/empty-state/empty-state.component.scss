@@ -1,0 +1,21 @@
+.empty-state {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    /* Center it */
+    padding: 20px;
+    text-align: center;
+    width: 100%;
+    max-width: 400px;
+    animation: fadeInPop 0.7s ease-out;
+}
+
+.empty-state i {
+    color: #ccc;
+}
+
+.empty-state p {
+    font-size: 1.2rem;
+    color: #555;
+}
