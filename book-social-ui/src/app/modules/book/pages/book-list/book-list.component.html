@@ -1,4 +1,4 @@
-<p>book-list</p>
+<h5 class="text-primary">Book List</h5>
 
 <app-loader *ngIf="isLoading"></app-loader>
 
@@ -8,6 +8,9 @@
 </div>
 
 <hr />
+
+
+<app-empty-state *ngIf="!isLoading && !bookResponse?.content?.length" [message]="'No books found'"></app-empty-state>
 
 <div class="d-flex justify-content-start gap-2 flex-wrap" *ngIf="bookResponse?.content?.length">
     <app-book-card *ngFor="let book of bookResponse.content" [book]="book" (borrow)="onBorrow($event)">

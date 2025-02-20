@@ -6,6 +6,7 @@ import { MyBooksComponent } from './pages/my-books/my-books.component';
 import { ManageBookComponent } from './pages/manage-book/manage-book.component';
 import { BorrowedBookListComponent } from './pages/borrowed-book-list/borrowed-book-list.component';
 import { authGuard } from '../../services/guard/auth.guard';
+import { ReturnedBookListComponent } from './pages/returned-book-list/returned-book-list.component';
 
 const routes: Routes = [
   {
@@ -42,6 +43,12 @@ const routes: Routes = [
         component: BorrowedBookListComponent,
         canActivate: [authGuard],
         title: "Borrowed Books"
+      },
+      {
+        path: "returned-books",
+        component: ReturnedBookListComponent,
+        canActivate: [authGuard],
+        title: "Returned Books"
       }
     ]
   }

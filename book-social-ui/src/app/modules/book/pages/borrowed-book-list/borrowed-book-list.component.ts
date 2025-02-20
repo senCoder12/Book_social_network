@@ -3,11 +3,12 @@ import { Component, OnInit } from '@angular/core';
 import { BorrowedBookResponse, PageResponseBorrowedBookResponse } from '../../../../services/models';
 import { BooksService } from '../../../../services/services';
 import { PaginationComponent } from '../../components/pagination/pagination.component';
+import { EmptyStateComponent } from '../../components/empty-state/empty-state.component';
 
 @Component({
   selector: 'app-borrowed-book-list',
   standalone: true,
-  imports: [CommonModule, PaginationComponent],
+  imports: [CommonModule, PaginationComponent, EmptyStateComponent],
   templateUrl: './borrowed-book-list.component.html',
   styleUrl: './borrowed-book-list.component.scss'
 })
@@ -16,7 +17,7 @@ export class BorrowedBookListComponent implements OnInit{
   borrowedBooks: PageResponseBorrowedBookResponse = {};
   selectedBook: BorrowedBookResponse = {};
   page: number = 0;
-  size: number = 5;
+  size: number = 10;
   isLoading: boolean = false;
 
   constructor(
@@ -45,39 +46,6 @@ export class BorrowedBookListComponent implements OnInit{
         console.error(error);
       }
     })
-  }
-
-  gotoFirstPage() {
-    this.page = 0;
-    this.finalBorrowedBooks();
-  }
-
-  gotoPreviousPage() {
-    if (this.borrowedBooks && this.borrowedBooks.totalPages !== undefined) {
-      this.page = this.borrowedBooks.totalPages - 1;
-    }
-    this.finalBorrowedBooks();
-  }
-
-  gotoPage(page: number) {
-    this.page = page;
-    this.finalBorrowedBooks();
-  }
-
-  gotoNextPage() {
-    this.page = this.page + 1;
-    this.finalBorrowedBooks();
-  }
-
-  gotoLastPage() {
-    if (this.borrowedBooks && this.borrowedBooks.totalPages !== undefined) {
-      this.page = this.borrowedBooks.totalPages - 1;
-    }
-    this.finalBorrowedBooks();
-  }
-
-  get isLastPage(): boolean {
-    return this.borrowedBooks && this.borrowedBooks.totalPages !== undefined && this.page + 1 === this.borrowedBooks.totalPages;
   }
 
   onPageChange(page: number) {

@@ -7,11 +7,12 @@ import { FormsModule } from '@angular/forms';
 import { Router, RouterLink } from '@angular/router';
 import { PaginationComponent } from '../../components/pagination/pagination.component';
 import { LoaderComponent } from '../../components/loader/loader.component';
+import { EmptyStateComponent } from '../../components/empty-state/empty-state.component';
 
 @Component({
   selector: 'app-my-books',
   standalone: true,
-  imports: [ BookCardComponent, CommonModule, FormsModule, RouterLink, PaginationComponent, LoaderComponent],
+  imports: [ BookCardComponent, CommonModule, FormsModule, RouterLink, PaginationComponent, LoaderComponent, EmptyStateComponent],
   templateUrl: './my-books.component.html',
   styleUrl: './my-books.component.scss'
 })
@@ -41,41 +42,6 @@ export class MyBooksComponent {
           this.isLoading = false;
         }
       });
-    }
-  
-    gotoFirstPage() {
-      this.page = 0;
-      this.findAllBooks();
-    }
-  
-    gotoPreviousPage() {
-      if (this.bookResponse && this.bookResponse.totalPages !== undefined) {
-        this.page = this.bookResponse.totalPages - 1;
-      }
-      this.findAllBooks();
-    }
-  
-    gotoPage(page: number) {
-      this.page = page;
-      this.findAllBooks();
-    }
-  
-    gotoNextPage() {
-      if (this.bookResponse && this.bookResponse.totalPages !== undefined) {
-        this.page = this.bookResponse.totalPages + 1;
-      }
-      this.findAllBooks();
-    }
-  
-    gotoLastPage() {
-      if (this.bookResponse && this.bookResponse.totalPages !== undefined) {
-        this.page = this.bookResponse.totalPages;
-      }
-      this.findAllBooks();
-    }
-  
-    get isLastPage(): boolean {
-      return this.bookResponse && this.bookResponse.totalPages !== undefined && this.page === this.bookResponse.totalPages;
     }
 
     archiveBook(book: BookResponse) {

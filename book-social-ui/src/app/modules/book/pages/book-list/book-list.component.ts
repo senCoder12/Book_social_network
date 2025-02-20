@@ -5,11 +5,12 @@ import { CommonModule } from '@angular/common';
 import { BookCardComponent } from "../../components/book-card/book-card.component";
 import { PaginationComponent } from '../../components/pagination/pagination.component';
 import { LoaderComponent } from '../../components/loader/loader.component';
+import { EmptyStateComponent } from '../../components/empty-state/empty-state.component';
 
 @Component({
   selector: 'app-book-list',
   standalone: true,
-  imports: [CommonModule, BookCardComponent, PaginationComponent, LoaderComponent],
+  imports: [CommonModule, BookCardComponent, PaginationComponent, LoaderComponent, EmptyStateComponent],
   templateUrl: './book-list.component.html',
   styleUrl: './book-list.component.scss'
 })
