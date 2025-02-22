@@ -6,9 +6,58 @@
 
   <h5 class="text-center text-primary mb-4">My Borrowed Book</h5>
   <hr />
+
+  <div class="d-flex flex-column col-6" *ngIf="selectedBook">
+    <h2>Return and Share feedback</h2>
+    <div class="d-flex flex-column col-12">
+      <div class="d-flex">
+        <div class="col-1">
+          <strong>Title</strong>
+        </div>
+        <div class="col-11">{{selectedBook.title}}</div>
+      </div>
+      <div class="d-flex">
+        <div class="col-1">
+          <strong>Author</strong>
+        </div>
+        <div class="col-11">{{selectedBook.authorName}}</div>
+      </div>
+      <div class="d-flex">
+        <div class="col-1">
+          <strong>Rate</strong>
+        </div>
+        <div class="col-11">{{selectedBook.rate}}</div>
+      </div>
+    </div>
+    <hr />
+    <div class="col-12">
+      <form class="row g-3">
+        <div class="d-flex gap-3">
+          <input [(ngModel)]="feedBackRequest.note" type="range" class="form-range w-25" id="Rate" name="rate" min="0" max="5" step="0.5">
+          <app-rating [rating]="feedBackRequest.note || 0"></app-rating>
+          {{feedBackRequest.note}}
+        </div>
+        <div class="col-12">
+          <label for="feedback" class="form-label">Feedback</label>
+          <textarea [(ngModel)]="feedBackRequest.comment" rows="4" class="form-control" is="feedback" name="feedback" placeholder="Feedback"></textarea>
+        </div>
+        <div class="d-flex justify-content-end gap-2 col-12">
+          <button (click)="returnBook(true)" type="submit" class="btn btn-outline-primary">
+            <i class="fas fa-save">&nbsp;Rate the book & Return</i>
+          </button>
+          <button (click)="returnBook(false)" type="submit" class="btn btn-outline-success">
+            <i class="fa-solid fa-paper-plane">&nbsp; Just Return</i>
+          </button>
+          <button (click)="selectedBook=undefined" class="btn btn-link btn-outline-danger">
+            <i class="fas fa-times">&nbsp; Cancel</i>
+          </button>
+        </div>
+      </form>
+    </div>
+  </div>
   
   <app-empty-state *ngIf="!isLoading && !borrowedBooks?.content?.length" [message]="'No borrowed books found.'"></app-empty-state>
-  <table class="table table-striped table-bordered custom-table" *ngIf="borrowedBooks?.content?.length">
+  <table class="table table-striped table-bordered custom-table" *ngIf="borrowedBooks?.content?.length && !selectedBook">
     <thead>
       <tr>
         <th scope="col">#</th>
